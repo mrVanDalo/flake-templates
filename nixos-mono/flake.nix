@@ -152,7 +152,6 @@
             host = "primus.example.com";
             modules = [
               # nixos-hardware.nixosModules.lenovo-thinkpad-x220
-              homeManagerModules
               { home-manager.users.your-name = import ./nixos/homes/your-name; }
             ];
           };

@@ -9,5 +9,6 @@
     pkgs.gojq
     pkgs.jq
     pkgs.ijq
+    pkgs.silver-searcher
   ];
 }

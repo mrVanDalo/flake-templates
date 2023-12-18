@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   xsession.windowManager.i3 = {
     enable = true;
@@ -33,7 +33,7 @@
 
   programs.alacritty = {
     enable = true;
-    settings.font.size = 6.5;
+    settings.font.size = lib.mkForce 6.5;
   };
 
 }

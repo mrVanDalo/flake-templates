@@ -8,7 +8,7 @@
 # How to see configurations
 
 > don't forget to make nix use flakes [https://nixos.wiki/wiki/Flakes](https://nixos.wiki/wiki/Flakes)
- 
+
 ```
 echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
 ```
