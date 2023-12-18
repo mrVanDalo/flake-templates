@@ -2,7 +2,8 @@
 {
   imports = [
     ./git.nix
-    #./i3.nix
+    ./i3.nix
+    ./packages.nix
     ./ssh.nix
     ./taskwarrior.nix
   ];

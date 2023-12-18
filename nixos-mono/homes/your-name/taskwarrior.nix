@@ -9,5 +9,6 @@
       report.active.columns = [ "id" "start" "entry.age" "priority" "project" "due" "description" ];
       report.active.labels = [ "ID" "Started" "Age" "Priority" "Project" "Due" "Description" ];
     };
+    home.packages = [ pkgs.taskwarrior-tui ];
   };
 }

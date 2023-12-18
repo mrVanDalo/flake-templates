@@ -60,8 +60,8 @@
         home-manager.lib.homeManagerConfiguration {
           inherit (meta) pkgs;
           modules = [
-            stylix.homeManagerModules.stylix
-            { stylix.image = lib.mkDefault ./assets/wallpaper.png; }
+            #stylix.homeManagerModules.stylix
+            #{ stylix.image = lib.mkDefault ./assets/wallpaper.png; }
             {
               imports = [ ./homes/${name} ];
               home.packages = [ home-manager.packages.${system}.home-manager ];
