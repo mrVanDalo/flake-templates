@@ -21,7 +21,7 @@
             position = "top";
             workspaceButtons = true;
             workspaceNumbers = true;
-            statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${config.home.homeDirectory}/.config/i3status-rust/config-blocks.toml";
+            statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${config.home.homeDirectory}/.config/i3status-rust/config-default.toml";
             fonts.size = 10.0;
             trayOutput = "primary";
           }

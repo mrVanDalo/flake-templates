@@ -10,5 +10,6 @@
     pkgs.jq
     pkgs.ijq
     pkgs.silver-searcher
+    pkgs.vim
   ];
 }
