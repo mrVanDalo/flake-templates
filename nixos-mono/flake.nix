@@ -21,16 +21,17 @@
   };
 
   outputs =
-    { self
-    , disko
-    , home-manager
-    , nixinate
-    , nixos-hardware
-    , nixpkgs
-    , nixpkgs-legacy_2305
-    , nixpkgs-unstable
-    , permown
-    , stylix
+    {
+      self,
+      disko,
+      home-manager,
+      nixinate,
+      nixos-hardware,
+      nixpkgs,
+      nixpkgs-legacy_2305,
+      nixpkgs-unstable,
+      permown,
+      stylix,
     }:
     let
 
@@ -56,7 +57,8 @@
         specialArgs = { };
       };
 
-      createHomeManagerConfiguration = { name }:
+      createHomeManagerConfiguration =
+        { name }:
         home-manager.lib.homeManagerConfiguration {
           inherit (meta) pkgs;
           modules = [
@@ -71,16 +73,18 @@
 
       # create machine configuration
       createNixosConfiguration =
-        { name
-        , host ? "${name}.private"
-        , modules
+        {
+          name,
+          host ? "${name}.private",
+          modules,
         }:
         lib.nixosSystem {
           inherit (meta) system specialArgs pkgs;
-          modules = modules ++
-            defaultNixModules ++
-            defaultNixOSModules ++
-            [
+          modules =
+            modules
+            ++ defaultNixModules
+            ++ defaultNixOSModules
+            ++ [
               {
                 # deployment tool nixinate
                 _module.args.nixinate = {
@@ -105,7 +109,8 @@
           _module.args.self = self;
           _module.args.inputs = self.inputs;
         }
-        ({ pkgs, lib, ... }:
+        (
+          { pkgs, lib, ... }:
           {
             nix = {
               # no channels needed this way
@@ -116,7 +121,8 @@
                 experimental-features = nix-command flakes
               '';
             };
-          })
+          }
+        )
         { nix.settings.substituters = [ "https://cache.nixos.org/" ]; }
       ];
 
@@ -145,22 +151,15 @@
       };
 
       # nixos configurations
-      nixosConfigurations =
-        {
-          primus = createNixosConfiguration {
-            name = "primus";
-            host = "primus.example.com";
-            modules = [
-              # nixos-hardware.nixosModules.lenovo-thinkpad-x220
-              { home-manager.users.your-name = import ./nixos/homes/your-name; }
-            ];
-          };
+      nixosConfigurations = {
+        primus = createNixosConfiguration {
+          name = "primus";
+          host = "primus.example.com";
+          modules = [
+            # nixos-hardware.nixosModules.lenovo-thinkpad-x220
+            { home-manager.users.your-name = import ./nixos/homes/your-name; }
+          ];
         };
+      };
     };
 }
-
-
-
-
-
-

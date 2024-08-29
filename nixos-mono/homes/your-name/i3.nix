@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   xsession = {
     enable = true;
@@ -13,7 +18,12 @@
         focus = {
           followMouse = true;
         };
-        startup = [{ command = "${pkgs.albert}/bin/albert"; always = true; }];
+        startup = [
+          {
+            command = "${pkgs.albert}/bin/albert";
+            always = true;
+          }
+        ];
         bars = [
           {
             #mode = "hide";
