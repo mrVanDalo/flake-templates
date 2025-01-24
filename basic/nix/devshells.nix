@@ -6,6 +6,13 @@
   perSystem =
     { pkgs, self', ... }:
     {
+
+      # allow unfree packages
+      _module.args.pkgs = import inputs.nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+
       devshells.default = {
 
         commands = [
