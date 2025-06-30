@@ -4,7 +4,12 @@
   imports = [ inputs.devshell.flakeModule ];
 
   perSystem =
-    { pkgs, self', ... }:
+    {
+      pkgs,
+      self',
+      system,
+      ...
+    }:
     {
 
       # allow unfree packages
