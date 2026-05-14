@@ -2,24 +2,51 @@
   description = "Description for the project";
 
   inputs = {
-    devshell.url = "github:numtide/devshell";
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   outputs =
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
+
       imports = [
-        ./nix/formatter.nix
-        ./nix/devshells.nix
+        inputs.flake-parts.flakeModules.partitions
       ];
+
       systems = [
         "x86_64-linux"
         "aarch64-linux"
       ];
+
+      # Outputs are only built when the named partition is loaded. Consumers
+      # of this flake as a dependency will not see these inputs.
+      partitionedAttrs.checks = "ci";
+      partitionedAttrs.formatter = "ci";
+      partitionedAttrs.devShells = "dev";
+
+      # CI partition: lightweight inputs needed by CI runs (formatter checks,
+      # website renderers, ...). Loaded by `nix flake check` / `nix fmt`.
+      partitions.ci = {
+        extraInputsFlake = ./ci;
+        module = {
+          imports = [
+            ./nix/formatter.nix
+          ];
+        };
+      };
+
+      # Dev partition: everything a human needs interactively. Loaded by
+      # `nix develop`. Inherits CI inputs implicitly via partitionedAttrs.
+      partitions.dev = {
+        extraInputsFlake = ./dev;
+        module = {
+          imports = [
+            ./nix/devshells.nix
+          ];
+        };
+      };
+
       perSystem =
         {
           config,
