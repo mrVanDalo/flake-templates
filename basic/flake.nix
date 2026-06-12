@@ -28,10 +28,10 @@
       # CI partition: lightweight inputs needed by CI runs (formatter checks,
       # website renderers, ...). Loaded by `nix flake check` / `nix fmt`.
       partitions.ci = {
-        extraInputsFlake = ./ci;
+        extraInputsFlake = ./nix/ci;
         module = {
           imports = [
-            ./nix/formatter.nix
+            ./nix/ci/formatter.nix
           ];
         };
       };
@@ -39,10 +39,10 @@
       # Dev partition: everything a human needs interactively. Loaded by
       # `nix develop`. Inherits CI inputs implicitly via partitionedAttrs.
       partitions.dev = {
-        extraInputsFlake = ./dev;
+        extraInputsFlake = ./nix/dev;
         module = {
           imports = [
-            ./nix/devshells.nix
+            ./nix/dev/devshells.nix
           ];
         };
       };

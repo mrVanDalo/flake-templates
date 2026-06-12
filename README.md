@@ -14,6 +14,16 @@ or
 nix flake init --template github:mrvandalo/flake-templates#basic
 ```
 
+### Updating
+
+The template uses [flake-parts partitions](https://flake.parts/options/flake-parts-partitions) to keep CI and dev inputs lazy. This means there are three lock files to update:
+
+```shell
+nix flake update                # top-level: nixpkgs, flake-parts
+(cd nix/ci && nix flake update) # CI partition: treefmt-nix
+(cd nix/dev && nix flake update)# dev partition: devshell
+```
+
 ## NixOS Mono Repository
 
 Bootstrap your NixOS setup.

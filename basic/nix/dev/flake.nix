@@ -5,5 +5,5 @@
     devshell.url = "github:numtide/devshell";
   };
 
-  outputs = _: { };
+  outputs = inputs: { inherit inputs; };
 }

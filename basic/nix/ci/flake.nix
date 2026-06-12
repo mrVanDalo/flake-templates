@@ -5,5 +5,5 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
-  outputs = _: { };
+  outputs = inputs: { inherit inputs; };
 }
